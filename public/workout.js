@@ -4,7 +4,7 @@ async function initWorkout() {
     if (lastWorkout) {
         document
         .querySelector("a[href='/exercise?']")
-        .setAttribute("href", `/exercise?id=${lastworkout._id}`);
+        .setAttribute("href", `/exercise?id=${lastWorkout._id}`);
 
 
         const workoutSummary = {
@@ -63,7 +63,7 @@ function renderWorkoutSummary(summary) {
         const strong = document.createElement("strong");
 
         strong.textContent = workoutKeyMap[key];
-        const textNode = document.createTextNode(`: ${summary[Key]}`);
+        const textNode = document.createTextNode(`: ${summary[key]}`);
 
         p.appendChild(strong);
         p.appendChild(textNode);

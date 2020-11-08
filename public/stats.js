@@ -3,36 +3,36 @@ fetch("/api/workouts/range")
         return response.json();
     })
     .then(data => {
-        popularChart(data)
+        populateChart(data)
     });
 
 
-API.getLastWorkoutsInRange()
+API.getWorkoutsInRange()
 
     function generatePalette() {
         const arr = [
-            "#003f5c",
-            "#2f4b7c",
-            "#665191",
-            "#a05195",
-            "#d45087",
-            "#f95d6a",
-            "#ff7c43",
-            "ffa600",
-            "#003f5c",
-            "#2f4b7c",
-            "#665191",
-            "#a05195",
-            "#d45087",
-            "#f95d6a",
-            "#ff7c43",
-            "ffa600"
+        "#003f5c",
+        "#2f4b7c",
+        "#665191",
+        "#a05195",
+        "#d45087",
+        "#f95d6a",
+        "#ff7c43",
+        "ffa600",
+        "#003f5c",
+        "#2f4b7c",
+        "#665191",
+        "#a05195",
+        "#d45087",
+        "#f95d6a",
+        "#ff7c43",
+        "ffa600"
         ]
 
         return arr;
     }
 
-    function popularChart(data) {
+    function populateChart(data) {
         let durations = duration(data);
         let pounds = calculateTotalWeight(data);
         let workouts = workoutNames(data);
@@ -43,7 +43,7 @@ API.getLastWorkoutsInRange()
         let pie = document.querySelector("#canvas3").getContext("2d");
         let pie2 = document.querySelector("#canvas4").getContext("2d");
 
-        let lineChart = new CharacterData(line, {
+        let lineChart = new Chart(line, {
             type: "line",
             data: {
                 labels: [
@@ -60,7 +60,7 @@ API.getLastWorkoutsInRange()
                         label: "workout Duration in Minutes",
                         backgroundColor: "red",
                         borderColor: "red",
-                        data: duration,
+                        data: durations,
                         fill: false
                     }
                 ]
@@ -83,7 +83,7 @@ API.getLastWorkoutsInRange()
             }
         });
 
-        let barChart = new CharacterData(bar, {
+        let barChart = new Chart(bar, {
             type: "bar",
             data: {
                 labels: [
@@ -136,7 +136,7 @@ API.getLastWorkoutsInRange()
             }
         });
 
-        let pieChart = new CharacterData(pie, {
+        let pieChart = new Chart(pie, {
             type: "pie",
             data: {
                 labels: workouts,
@@ -156,7 +156,7 @@ API.getLastWorkoutsInRange()
             }
         });
 
-        let donutChart = new CharacterData(pie2, {
+        let donutChart = new Chart(pie2, {
             type: "doughnut",
             data: {
                 labels: workouts, 
@@ -182,7 +182,7 @@ API.getLastWorkoutsInRange()
 
         data.forEach(workout => {
             workout.exercises.forEach(exercise => {
-                duration.push(exercise.duration);
+                durations.push(exercise.duration);
             });
         });
 
@@ -205,7 +205,7 @@ API.getLastWorkoutsInRange()
         let workouts = [];
 
         data.forEach(workout => {
-            workout.exercises.forEach(exericse => {
+            workout.exercises.forEach(exercise => {
                 workouts.push(exercise.name);
             });
         });
